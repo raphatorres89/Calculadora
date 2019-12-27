@@ -12,6 +12,24 @@ pipeline {
                 }
             }
         }
+        stage('Build') {
+            steps {
+                script {
+                    try {
+                        sh './gradlew clean build'
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    try {
+                        sh 'java -jar build/libs/calculadora-0.0.1-SNAPSHOT.jar'
+                    }
+                }
+            }
+        }
     }
     post {
         always {
